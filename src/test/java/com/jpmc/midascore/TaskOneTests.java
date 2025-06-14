@@ -1,13 +1,19 @@
 package com.jpmc.midascore;
 
+import com.jpmc.midascore.foundation.Transaction;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.kafka.core.KafkaTemplate;
 
-@SpringBootTest
+@SpringBootTest(properties = {"general.kafka-topic=test-topic"})
 class TaskOneTests {
     static final Logger logger = LoggerFactory.getLogger(TaskOneTests.class);
+
+    @MockBean
+    private KafkaTemplate<String, Transaction> kafkaTemplate;
 
     @Test
     void task_one_verifier() throws InterruptedException {
